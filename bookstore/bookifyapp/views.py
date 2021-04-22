@@ -23,7 +23,7 @@ def hello(request):
 
 
 def create(request):
-    bk = bookForm(request.POST)
+    bk = bookForm(request.POST or None)
     if bk.is_valid():
         bk.save()
         return redirect("index")
