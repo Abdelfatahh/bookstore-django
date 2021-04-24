@@ -33,6 +33,7 @@ class Book(models.Model):
     tag = models.ForeignKey(Tag, null=True, blank=True, on_delete=models.CASCADE)
     categories = models.ManyToManyField(Category)
     isbn_auto_generated_number = models.UUIDField(default=uuid.uuid4, editable=False)
+    
     class Meta:
         db_table = "books"
     def __str__ (self):

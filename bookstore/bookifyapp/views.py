@@ -6,7 +6,10 @@ from django.http import HttpResponse
 from bookifyapp.forms import bookForm
 from django.shortcuts import redirect
 from bookifyapp.models import Book
+from django.contrib.auth.decorators import login_required, permission_required
 
+@login_required(login_url="/login")
+@permission_required(["store.view_store"], raise_exception=True)
 
 def hello(request): 
         if request.method == "POST":
@@ -21,7 +24,7 @@ def hello(request):
                 form = bookForm()
         return render(request, 'index.html', {'form':form})
 
-
+@login_required
 def create(request):
     bk = bookForm(request.POST or None)
     if bk.is_valid():
